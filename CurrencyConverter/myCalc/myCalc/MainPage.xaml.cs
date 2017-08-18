@@ -60,8 +60,8 @@ namespace myCalc
         private void calculateButton_Click(object sender, RoutedEventArgs e)
         {
           //Conversions
-            formData.USDtoCAD = .787m;//USD to CAD
-            formData.USDtoMXN = .056m;//USD to MXN
+            formData.USDtoCAD = 1 / 1.26m;//USD to CAD
+            formData.USDtoMXN = 1 / 17.72m;//USD to MXN
             formData.USDtoEUR = 1m / (.85m);//USD to EUR
             formData.USDtoJPY = 1m / (109.70m);//USD to JPY
             
@@ -123,6 +123,15 @@ namespace myCalc
                 formData.convertedTo = Convert.ToDecimal(currencyAmountTextBox.Text) * formData.conversionFactor;
 
                 convertedAmountTextBlock.Text = "¥" + Convert.ToString(formData.convertedTo);
+            }
+
+            else if (convertFromComboBox.SelectedItem.ToString() == "CAD" && convertToComboBox.SelectedItem.ToString() == "USD")
+            {
+                formData.conversionFactor = formData.CADtoUSD;
+
+                formData.convertedTo = Convert.ToDecimal(currencyAmountTextBox.Text) * formData.conversionFactor;
+
+                convertedAmountTextBlock.Text = "$" + Convert.ToString(formData.convertedTo);
             }
         }
 
