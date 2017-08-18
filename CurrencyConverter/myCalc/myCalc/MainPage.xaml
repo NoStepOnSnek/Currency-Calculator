@@ -1,0 +1,47 @@
+﻿<Page
+    x:Class="myCalc.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:myCalc"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" Width="1132">
+
+    <Grid x:Name="Currency_Conversion_Calculator" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+        <ComboBox x:Name="convertToComboBox" 
+                  HorizontalAlignment="Left" 
+                  Margin="619,351,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="400" Height="64" 
+                  FontFamily="Arial" 
+                  PlaceholderText="Select What Currency You Wish to Convert to" 
+                  SelectionChanged="convertToComboBox_SelectionChanged"/>
+
+
+
+        <ComboBox x:Name="convertFromComboBox" 
+                  HorizontalAlignment="Right" 
+                  Margin="0,351,655,0" 
+                  VerticalAlignment="Top" 
+                  Width="400" Height="64" 
+                  FontFamily="Arial" 
+                  SelectionChanged="convertFromComboBox_SelectionChanged" 
+                  PlaceholderText="Select the Currency You Wish to Convert" 
+                  />
+        
+
+        <TextBlock x:Name="convertedAmountTextBlock" HorizontalAlignment="Left" Margin="619,456,0,0" TextWrapping="Wrap" Text="--" VerticalAlignment="Top" Height="64" Width="302" FontFamily="Arial"/>
+
+        <Button x:Name="calculateButton" Content="Calculate" HorizontalAlignment="Left" Margin="240,582,0,0" VerticalAlignment="Top" Height="65" Width="237" Click="calculateButton_Click" FontFamily="Arial" FontSize="18"/>
+
+        <Button x:Name="quitButton" Content="Quit" HorizontalAlignment="Left" Margin="619,582,0,0" VerticalAlignment="Top" Height="65" Width="237" Click="quitButton_Click" FontFamily="Arial" FontSize="18"/>
+
+        <Image Source="Images\carterPic.jpg" x:Name="carterPic" HorizontalAlignment="Right" Height="220" Margin="0,47,311,0" VerticalAlignment="Top" Width="202"/>
+
+        <Image x:Name="nickPic" HorizontalAlignment="Left" Height="220" Margin="273,47,0,0" VerticalAlignment="Top" Width="204"/>
+
+        <TextBox x:Name="currencyAmountTextBox" HorizontalAlignment="Left" Margin="175,456,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="64" Width="302" FontFamily="Arial" PlaceholderText="Enter Currency Amount" TextChanged="currencyAmountTextBox_TextChanged"/>
+
+    </Grid>
+</Page>

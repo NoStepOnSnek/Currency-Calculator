@@ -1,0 +1,16 @@
+﻿<Page
+    x:Class="HelloWorldButton.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:HelloWorldButton"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Button x:Name="helloButton" Content="Hello World" HorizontalAlignment="Left" Margin="40,460,0,0" VerticalAlignment="Top" Click="Button_Click" Height="52" Width="161"/>
+        <Button x:Name="goodByeButton" Content="Goodbye World" HorizontalAlignment="Right" Margin="0,460,40,0" VerticalAlignment="Top" Click="Button_Click" Height="52" Width="161"/>
+        <TextBox x:Name="TextBoxThing" HorizontalAlignment="Left" Margin="162,307,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+
+    </Grid>
+</Page>
