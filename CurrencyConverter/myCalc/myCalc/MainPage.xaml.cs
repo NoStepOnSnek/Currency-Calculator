@@ -17,13 +17,19 @@ using Windows.UI.Xaml.Navigation;
 
 namespace myCalc
 {
-
-    
-
     public sealed partial class MainPage : Page
     {
+        public struct Calculate
+        {
+            public string sourceCountry, targetCountry;
+            public decimal amount, convertToRate, convertFromRate, convertedAmount;
+            public int selectedIndexOrigin, selectedIndexTarget, hiddenIndexTo, hiddenIndexFrom;
+        }
 
-        
+        public static Calculate currency = new Calculate();
+
+
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -32,21 +38,93 @@ namespace myCalc
                 
         }
 
-        private void calculateButton_Click(object sender, RoutedEventArgs e)
+        public async void calculateButton_Click(object sender, RoutedEventArgs e)
         {
-            //Left off here
-            //var combo = sender as convertFromComboBox;
-            var selectedItem = convertFromComboBox.SelectedIndex;
-            var hiddenIndex = selectedItem;
+            //Stores the index numbers of the Source and Target combo boxes
+            currency.selectedIndexOrigin = convertFromComboBox.SelectedIndex;
+            currency.hiddenIndexTo = currency.selectedIndexOrigin;
+            hiddenCB.SelectedIndex = currency.hiddenIndexTo;
 
-            hiddenCB.SelectedIndex = hiddenIndex;
+            currency.convertToRate = Convert.ToDecimal(hiddenCB.SelectedItem);
+            
+            //Convert To CB data
+            currency.selectedIndexTarget = convertToComboBox.SelectedIndex;
+            currency.hiddenIndexFrom = currency.selectedIndexTarget;
+            hiddenCB2.SelectedIndex = currency.hiddenIndexFrom;
 
-            string sourceCountry = Convert.ToString(convertFromComboBox.SelectedItem);
-            decimal conversionRate = Convert.ToDecimal(hiddenCB.SelectedItem);
+            currency.convertFromRate = Convert.ToDecimal(hiddenCB2.SelectedItem);
 
-            convertedAmountTextBlock.Text = Convert.ToString(sourceCountry);
+            //Stores the selected country of the Source and Target combo boxes
+            currency.sourceCountry = Convert.ToString(convertFromComboBox.SelectedItem);
+            currency.targetCountry = Convert.ToString(convertToComboBox.SelectedItem);
 
+            currency.amount = Convert.ToDecimal(currencyAmountTextBox.Text);
 
+            SourceUS();
+            TargetUS();
+            NeitherUS();
+
+            MediaElement mediaElement = new MediaElement();
+            var synth = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
+            Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync(convertedAmountTextBlock.Text + currency.targetCountry);
+            mediaElement.SetSource(stream, stream.ContentType);
+            mediaElement.Play();
+
+        }
+
+        
+        public decimal SourceUS()
+        {
+
+            if (currency.sourceCountry == "United States")
+            {
+                currency.convertedAmount = currency.amount * currency.convertFromRate;
+                var roundedAmount = Math.Round(currency.convertedAmount, 2);
+
+                convertedAmountTextBlock.Text = Convert.ToString(roundedAmount);
+                return currency.convertedAmount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public decimal TargetUS()
+        {
+            currency.amount = Convert.ToDecimal(currencyAmountTextBox.Text);
+
+            if (currency.targetCountry == "United States")
+            {
+                currency.convertedAmount = currency.amount / currency.convertToRate;
+                var roundedAmount = Math.Round(currency.convertedAmount, 2);
+
+                convertedAmountTextBlock.Text = Convert.ToString(roundedAmount);
+                return currency.convertedAmount;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
+        public decimal NeitherUS()
+        {
+            currency.amount = Convert.ToDecimal(currencyAmountTextBox.Text);
+            
+            if (currency.targetCountry != "United States" && currency.sourceCountry != "United States")
+            {
+                currency.convertedAmount = (currency.amount / currency.convertToRate) * currency.convertFromRate;
+
+                var roundedAmount = Math.Round(currency.convertedAmount, 2);
+
+                convertedAmountTextBlock.Text = Convert.ToString(roundedAmount);
+                return currency.convertedAmount;
+            }
+            else
+            {
+                return 0;
+            }
         }
 
         private void quitButton_Click(object sender, RoutedEventArgs e)
@@ -87,10 +165,16 @@ namespace myCalc
 
             //These numbers are the values compared to USD value
             hiddenCB.Items.Add("1.00");
-            hiddenCB.Items.Add("1.28");
+            hiddenCB.Items.Add("1.25");
             hiddenCB.Items.Add("1.27");
             hiddenCB.Items.Add("0.85");
-            hiddenCB.Items.Add("109.00");
+            hiddenCB.Items.Add("109.56");
+
+            hiddenCB2.Items.Add("1.00");
+            hiddenCB2.Items.Add("1.25");
+            hiddenCB2.Items.Add("1.27");
+            hiddenCB2.Items.Add("0.85");
+            hiddenCB2.Items.Add("109.56");
 
 
         }

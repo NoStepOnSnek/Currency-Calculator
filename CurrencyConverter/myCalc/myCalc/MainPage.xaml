@@ -44,6 +44,7 @@ Source="Images\nicPic.jpg" x:Name="nickPic"  HorizontalAlignment="Left" Height="
 
         <TextBox x:Name="currencyAmountTextBox" HorizontalAlignment="Left" Margin="175,456,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Height="64" Width="302" FontFamily="Arial" PlaceholderText="Enter Currency Amount" TextChanged="currencyAmountTextBox_TextChanged"/>
         <ComboBox x:Name="hiddenCB" HorizontalAlignment="Left" Margin="926,92,0,0" VerticalAlignment="Top" Width="156" FontFamily="Arial" Visibility="Collapsed"/>
+        <ComboBox x:Name="hiddenCB2" HorizontalAlignment="Left" Height="3" Margin="921,238,0,0" VerticalAlignment="Top" Width="161" Visibility="Collapsed"/>
 
     </Grid>
 </Page>
