@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
@@ -58,12 +59,31 @@ namespace myCalc
             currency.sourceCountry = Convert.ToString(convertFromComboBox.SelectedItem);
             currency.targetCountry = Convert.ToString(convertToComboBox.SelectedItem);
 
-            currency.amount = Convert.ToDecimal(currencyAmountTextBox.Text);
+
+            try
+            {
+                currency.amount = Convert.ToDecimal(currencyAmountTextBox.Text);
+            }
+            catch (Exception ex)
+            {
+                ContentDialog noNumberDialog = new ContentDialog
+                {
+                    Title = "Incorrect Value in Field",
+                    Content = "Enter a numeric value in the textbox.",
+                    CloseButtonText = "Ok"
+                };
+
+                ContentDialogResult result = await noNumberDialog.ShowAsync();
+
+                return;
+            }
 
             SourceUS();
             TargetUS();
             NeitherUS();
 
+
+            //Reads out the value, and Country it is from / for
             MediaElement mediaElement = new MediaElement();
             var synth = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
             Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync(convertedAmountTextBlock.Text + currency.targetCountry);
@@ -71,7 +91,6 @@ namespace myCalc
             mediaElement.Play();
 
         }
-
         
         public decimal SourceUS()
         {
@@ -174,7 +193,7 @@ namespace myCalc
             hiddenCB2.Items.Add("1.25");
             hiddenCB2.Items.Add("1.27");
             hiddenCB2.Items.Add("0.85");
-            hiddenCB2.Items.Add("109.56");
+            hiddenCB2.Items.Add("109.10");
 
 
         }

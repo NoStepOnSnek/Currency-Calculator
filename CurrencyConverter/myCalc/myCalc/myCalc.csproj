@@ -107,6 +107,10 @@
     <None Include="myCalc_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
     <Content Include="Images\nicPic.jpg" />
     <Content Include="Images\carterPic.jpg" />
     <Content Include="Properties\Default.rd.xml" />

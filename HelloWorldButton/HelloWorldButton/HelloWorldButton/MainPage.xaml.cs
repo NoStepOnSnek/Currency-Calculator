@@ -31,7 +31,7 @@ namespace HelloWorldButton
         {
             MediaElement mediaElement = new MediaElement();
             var synth = new Windows.Media.SpeechSynthesis.SpeechSynthesizer();
-            Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync("Water. Earth. Fire. Air. Long ago, the four nations lived together in harmony.Then everything changed when " + TextBoxThing.Text);
+            Windows.Media.SpeechSynthesis.SpeechSynthesisStream stream = await synth.SynthesizeTextToStreamAsync(TextBoxThing.Text);
             mediaElement.SetSource(stream, stream.ContentType);
             mediaElement.Play();
         }
